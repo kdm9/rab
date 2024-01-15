@@ -1,0 +1,6 @@
+[book]
+authors = ["Dr. K.D. Murray"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Reproducible Analyses: an opinionated guide"
