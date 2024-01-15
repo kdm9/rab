@@ -37,7 +37,7 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install mdBook
         run: |
-          curl --proto '=https' --tlsv1.2 -LsS https://github.com/rust-lang/mdBook/releases/download/v0.4.36/mdbook-v0.4.36-x86_64-unknown-linux-musl.tar.gz | tar xzf
+          curl --proto '=https' --tlsv1.2 -LsS https://github.com/rust-lang/mdBook/releases/download/v0.4.36/mdbook-v0.4.36-x86_64-unknown-linux-musl.tar.gz | tar xz
       - name: Build with mdBook
         run: ./mdbook build
       - name: Upload artifact
