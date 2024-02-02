@@ -1,10 +1,10 @@
 # Literate Analysis
 
-Literate Programming is a set of practices introduced by Donald Knuth (of `C`, and `.tex` fame), in which code isn't something simply dictated to a computer. Rather, code forms a larger document, which interleaves instructions in the form of code, as well as thoughts, prose, and output from whatever we asked the computer to do.
+Literate Programming is a set of practices introduced by Donald Knuth (of `C`, and `.tex` fame), in which code isn't something simply dictated to a computer. Rather, code forms a larger document, which interleaves instructions to the computer (code), as well as one's thoughts (prose), and the results of whatever we asked the computer to do (outputs).
 
-I hope it's immediately clear to you that this paradigm is highly applicable to us as computational scientists: while we care about the specifics instructions we give to a computer, we care equally about the outputs, and about our logic at the time these commands were run.
+I hope it's immediately clear to you that this paradigm is highly applicable to us as computational scientists: while we care about the specifics instructions we give to a computer, we care equally about the outputs, and about the deeper scientific meaning of an analysis.
 
-Computational notebooks allow us to perform our analyses in a literate fashion. Below, I outline a few, before showing you how to work with my preferred system, Jupyter.
+Computational notebooks allow us to perform our analyses in a literate fashion, combining code, outputs, and prose. Below, I outline a few systems for literate analysis, before showing you how to work with my preferred system, Jupyter.
 
 ## Systems for literate analyses
 
