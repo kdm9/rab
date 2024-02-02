@@ -1,20 +1,22 @@
-# Git annex: version control of reproducible analyses
+# `git-annex`: version control for reproducible analyses
 
 [Git](https://git-scm.com/) has been a revolutionary tool for online collaborative software development. [Git annex](https://git-annex.branchable.com/) extends git's abilities to track and share large files in addition to code. Together these tools enable effective version control and collaboration on large bioinformatics analyses.
 
-This post is a brief case study on using git-annex to version an analysis workspace between multiple collaborators. I'm not going to re-hash the excellent [git-annex documentation](https://git-annex.branchable.com/walkthrough/), instead I'll show how I have used it in my recent work.
+This chapter is a motivating case study on using git-annex to version an analysis workspace between multiple collaborators. I'm not going to re-hash the excellent [git-annex documentation](https://git-annex.branchable.com/walkthrough/) which you should certainly read, instead I'll show how I have used `git-annex` in my work.
+
+Also, please note that I assume some degree of familiarity with basic `git` below. Please avail yourself of one of the many excellent git tutorials if you are new to git or if your git knowledge could use refreshment. Personally, I recommend [Software Carpentry's git-novice tutorial](https://swcarpentry.github.io/git-novice/) for complete beginners, and [Learn Git in X minutes](https://learnxinyminutes.com/docs/git/) for those who need a quick refresher or reference. And of course, the [git documentation website](https://git-scm.com/docs/) is the complete documentation of all the details, and even have their own [git tutorial](https://git-scm.com/docs/gittutorial).
 
 ### Part 1: Why bother
 
-We have been doing computation analyses for as long as there have been computers, so why bother with all this fanciness? In a nutshell: collaboration. To analogize somewhat loosely, tools like Google Docs are dramatic improvements over the traditional method of emailing around a million Word docs named like `Document_final_v3_revisions_supervisorcomments-v2_final.docx`. Similarly, git (and other version control software before it) made collaborative software development far easier and more accessible than mailing patches to some development mailing list.
+We have been doing computation analyses for as long as there have been computers, so why bother with all this fanciness? In a nutshell: collaboration. To analogize somewhat loosely, tools like Google Docs are dramatic improvements over the traditional method of emailing around a million Word docs named like `Document_final_v3_revisions_supervisorcomments-v2_final.docx`. Similarly, `git` (and other version control software before it) made collaborative software development far easier and more accessible than mailing patches to some development mailing list.
 
 But why git-annex specifically? Git itself was designed to work with code, but we wish to track not just our code, but also our raw data and some intermediate output data. The Linux kernel (for which git was originally developed) is about 30 million lines of code, totalling hundreds of megabytes of source code and accessory files. Despite being one of the largest and most active free software projects in the world, even the Linux kernel is dwarfed by nearly any modern genomics dataset: a single sample from the example *Arabidopsis* project below is over 1GB of sequence data, and the total project consists some 12TB of raw data. Git itself cannot handle this volume of data, and so various additions and extensions to git have been developed. git-annex is to my eyes the most applicable one to the typical biological data scientist [^1].
 
-How does git-annex differ from git? To a first approximation, it doesn't. Git-annex works on top of git, detecting large files and tracking them as symlink pointers to a hidden data store. One can then separately coordinate syncing of these large data files, either individually or in aggregate. Aside from this, git-annex behaves nearly identically to git itself, largely because it *is* just a wrapper around git for most other operations, as we will see below.
+How does git-annex differ from git? To a first approximation, it doesn't really. Git-annex works on top of git, detecting large files and tracking them as symlink pointers to a hidden data store. One can then separately coordinate syncing of these large data files, either individually or in aggregate. Aside from this, git-annex behaves nearly identically to git itself, largely because it *is* just a wrapper around git for most other operations, as we will see below.
 
 ### Part 2: Worked Example
 
-> I'll be assuming you're already familiar with git itself. If you're not, or would like a refresher, I suggest either the [git tutorial](https://git-scm.com/docs/gittutorial), or the software carpentry [git course](https://swcarpentry.github.io/git-novice/).
+> I'll be assuming you're already familiar with git itself. If you're not, or would like a refresher, I suggest either the , or the software carpentry [git course](https://swcarpentry.github.io/git-novice/).
 
 OK, so how do we actually use it? The git annex workflow is very similar to that of git. One makes changes, then stages, commits, and pushes them to a remote. The below commands give a brief outline of a hypothetical workflow.
 
@@ -30,23 +32,27 @@ git init
 git annex init
 ```
 
-We need to configure which files are handled by git itself, by git annex, or are ignored by both. We have a snakemake workflow at the root of the repo, raw data (which can't be recreated easily) in `./rawdata`, a notebook in `./notebook` which contains multiple shell, R, and python scripts with associated data, and computed data in `./data`.
+We need to configure which files are handled by git itself, by git annex, or are ignored by both. Let's say we have a Snakemake workflow at the root of the repo (like we just covered), and directories containing raw data (which can't be recreated easily) (`./rawdata`), temporary/computed data in `./tmp`, and a notebook (`./notebook`) which contains multiple shell, R, and python scripts with associated data.
 
 ```bash
 cat > .gitignore <<EOF
-/data/
+/tmp
 EOF
 
 cat > .gitattributes <<EOF
 * annex.largefiles=largerthan=10kb
 *.sh annex.largefiles=nothing
-*.txt annex.largefiles=nothing
+*.txt annex.largefiles=largerthan=10Mb
 *.R annex.largefiles=nothing
 *.py annex.largefiles=nothing
 EOF
 ```
 
-The above configs cause all files in `./data` (but not other directories called data) to be ignored by git altogether. We then tell `git annex` to track any file larger than 10kb, excluding any shell, R, or python scripts. One can customise things further if there are certain files or directories that should always be considered either small or large (e.g. adding `*.Rmd` to the list of small files, or forcing everything under `./rawdata` to be considered a large file and therefore tracked by git annex).
+The above configs cause all files in `./tmp` to be ignored by git altogether. We then tell `git annex` to track any file larger than 10kb, excluding any shell, R, or python scripts. One can customise things further if there are certain files or directories that should always be considered either small (tracked by *Ye Olde* `git`) or large (tracked by `git annex`) (e.g. adding `*.Rmd` to the list of small files, or forcing everything under `./rawdata` to be considered a large file).
+
+> Exercise:
+> 
+> How would one force all files under ./rawdata to be tracked as large files?
 
 
 #### Committing
@@ -110,6 +116,3 @@ Git annex support [special remotes](https://git-annex.branchable.com/special_rem
 [^1]: Others, like git-lfs, are designed to work with cloud-based git hosting platforms like GitHub. Typically, git-lfs users store the large files they track on e.g. Github. The costs of these services are significant: to store the aforementioned 12TB of raw data from our *Arabidopsis* project on GitHub would cost USD1200 per month!!!. Git-annex is far more flexible with how large datasets are stored and shared, allowing us to use our local HPC resources for storage.
 
 [^2]: See the `git annex sync --commit`, `--no-commit` CLI options, and `git config annex.autocommit` to alter this behaviour.
-
-
-{{< load-kphoto >}}
