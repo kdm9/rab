@@ -1,6 +1,6 @@
 # Workspaces and Data Hygiene
 
-When I say "workspace", I speak of a directory within which some computational analyses happen. If you're used to working in R, an Rstudio project is a great example of a workspace, and Rstudio provides a set of tools and conventions that help us keep track of our code, data, metadata, and results.
+This book is about how we do computational analyses, in some "workspace" either on our laptop, or on some server. When I say "workspace", I speak of a directory within which some computational analyses happen. If you're used to working in R, an Rstudio project is a great example of a workspace, and Rstudio provides a set of tools and conventions that help us keep track of our code, data, metadata, and results.
 
 Let's discuss key features of a well-organised workspace. Ideally, our workspaces should be:
 
@@ -16,7 +16,7 @@ Data hygiene refers to a set of good practices that help keep our workspace self
 
 `tl;dr:`
 
-- Step 0 of all analyses is to BACK UP RAW DATA NOW!!! Be a data squirrel!
+- Step 0 of all analyses is to BACK UP RAW DATA NOW!!! Be a data squirrel! I know people who lost multiple months of their work to a single HDD failure. These things happen, plan accordingly.
 - Keep raw data and output separate, ideally with raw data and code on a backed-up redundant file system, and intermediate and output files on fast temporary storage.
 - Record every step of your analyses, and write documentation of what each major output means *to you*.
 - Use version control to manage each workspace, recording all versions of an analysis and making sharing a workspace trivial.
@@ -25,8 +25,7 @@ This is merely a summary, the remainder of this book will cover each of the topi
 
 ### Backups
 
-Step 0 of all analyses is to BACK UP RAW DATA NOW!!! Be a data squirrel. There is a lot of theory around backups, but some tips: don't trust your data solely to institutional IT systems! They have a lot going on, are often understaffed, and are often more experienced with running a fleet of windows laptops than dealing with HPC and data analysis. At very least, keep your raw data on a hard drive along with some checksums to verify its integrity. A 20TB external HDD costs about 1% of the money you'd pay in sequencing to fill it -- a 1% data safety tax should be doable on nearly any budget.
-
+Step 0 of all analyses is to BACK UP RAW DATA NOW!!! Be a data squirrel. There is a lot of theory around backups, but it need not be complex: Keep at least one copy of the data lying somewhere it won't be accidentally deleted, ransomwared, rained on, or otherwise lost. Some tips: don't trust your data solely to institutional IT systems! They have a lot going on, are often understaffed, and are typically more experienced with running a fleet of windows laptops than dealing with data analysis. At very least, keep your raw data on a hard drive along with some checksums to verify its integrity. A 20TB external HDD costs about 1% of the money you'd pay in sequencing to fill it -- a 1% data safety tax should be doable on nearly any budget. To "do it properly", research things like [3-2-1 backups](https://www.backblaze.com/blog/the-3-2-1-backup-strategy/). Git-annex really helps with this, as we'll cover in chapter 6.
 
 ### Separate raw and re-creatable data
 
