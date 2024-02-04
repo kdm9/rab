@@ -1,4 +1,4 @@
-# Literate Analysis
+# Literate Analyses with Computational Notebooks
 
 Literate Programming is a set of practices introduced by Donald Knuth (of `C`, and `.tex` fame), in which code isn't something simply dictated to a computer. Rather, code forms a larger document, which interleaves instructions to the computer (code), as well as one's thoughts (prose), and the results of whatever we asked the computer to do (outputs).
 
@@ -23,7 +23,8 @@ As discussed above, the Jupyter ecosystem is my preferred way of doing literate 
 
 Below, I'll guide you through setting up JuptyerLab, with Python, R, and Bash kernels configured. You can run these commands on a nice beefy server, or on your local machine. I prefer to use nice big servers, where data lives, not a laptop with limited compute & storage (unless your data needs are small), although I still use this same setup on my laptop for when I'm doing something locally.
 
-First, we need to install the Jupyter
+First, we need to install the relevant bits of the Jupyter ecosystem, including the Jupyter core, JupyterLab, and kernels for R, Bash, and Python (add any other languages you want supported here, see discussion above/[this list](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels)).
+
 ```bash
 python3 -m pip install -U pip wheel
 python3 -m pip install -U jupyterlab nbconvert jupytext bash_kernel papermill
