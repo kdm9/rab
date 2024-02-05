@@ -1,7 +1,6 @@
 # Reproducible Analyses: an opinionated guide
 
 - [Introduction & Motivation](01_why.md)
-- [Workspaces and Data Management](02_organisation.md)
 - [Literate Analayses with Computational Notebooks](03_notebooks.md)
 - [Modern Terminals](04_terminal.md)
 - [Workflow Management](05_workflow-management.md)
