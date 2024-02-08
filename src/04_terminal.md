@@ -11,7 +11,7 @@ IN PROGRESS!!! :)
 
 A ecosystem for installing pre-compiled packages, and managing virtual environments. Conda works across programming languages, and has bioinformatics-specific teams/projects.
 
-For biologists: follow the install instructions for [bioconda](https://bioconda.github.io/), installing the [miniforge](https://github.com/conda-forge/miniforge) conda disribution and enabling the `bioconda` and `conda-forge` channels. For general compsci/data science folks, you're probably OK with just conda-forge.
+For biologists: follow the install instructions for [bioconda](https://bioconda.github.io/), installing the [miniforge](https://github.com/conda-forge/miniforge) conda distribution and enabling the `bioconda` and `conda-forge` channels. For general compsci/data science folks, you're probably OK with just conda-forge.
 
 ## rsync
 
@@ -22,7 +22,7 @@ If you're working with any kind of cloud storage, [rclone](https://rclone.org/) 
 
 ## Vim
 
-Vim is a terminal mode editor and deveopment environment.  Start by running `vimtutor` on pretty much any modern Unix (because vim is nearly everywhere!). Yes, it will be incredibly frustrating for the first about 20 minutes, that is normal. But trust me, once you get your head around it, you'll wonder how you ever did without it.
+Vim is a terminal mode editor and development environment.  Start by running `vimtutor` on pretty much any modern Unix (because vim is nearly everywhere!). Yes, it will be incredibly frustrating for the first about 20 minutes, that is normal. But trust me, once you get your head around it, you'll wonder how you ever did without it.
 
 ## Tmux
 
@@ -35,7 +35,7 @@ Tmux gives you tabs and sessions that persist across logins to a server. For tho
 
 ## rmlint
 
-[Rmlint](https://github.com/sahib/rmlint) is a tool to de-duplicate files, and clean up any weird 'lint' from the file system. Use with caution, but it's one of the safest tools for what is a surpirsingly error-prone task.
+[Rmlint](https://github.com/sahib/rmlint) is a tool to de-duplicate files, and clean up any weird 'lint' from the file system. Use with caution, but it's one of the safest tools for what is a surprisingly error-prone task.
 
 ## Zsh
 
@@ -45,4 +45,4 @@ An alternative shell that improves productivity. Zsh comes with a lot of time-sa
 - fuzzy matching during tab completion
 - time-saving niceties like `...` as a shortcut for `../..`, and automatically cd-ing (running `dir/name`  is equivalent to `cd dir/name`).
 
-So, switching gets you a bunch of minor conveiences for free. That said, there are ways of configuring bash to have some of these features.
+So, switching gets you a bunch of minor conveniences for free. That said, there are ways of configuring bash to have some of these features.

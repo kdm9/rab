@@ -4,7 +4,7 @@ Today we're learning how to manage computational workspaces. I'll start with som
 
 Then, we'll move to cover workflow management, which is a fancy way of saying "smart ways of working out which tasks are needed to complete an analysis". Specifically, we'll look at Snakemake, a python-based workflow manager with a billion fancy features that makes this task less daunting, especially for realistically-complex workflows. 
 
-As our case-study, we'll do a very simple variant calling workflow. This consists of sequence read QC, alignment to a reference, data reformatting, and finally variant calling and filtering. We'll gloss over a lot of the details of the workflow for time reasons, but it has been very nicely outlined in [this data-carpentry tutotrial](https://gwu-omics2019.readthedocs.io/en/latest/variant_calling.html)
+As our case-study, we'll do a very simple variant calling workflow. This consists of sequence read QC, alignment to a reference, data reformatting, and finally variant calling and filtering. We'll gloss over a lot of the details of the workflow for time reasons, but it has been very nicely outlined in [this data-carpentry tutorial](https://gwu-omics2019.readthedocs.io/en/latest/variant_calling.html)
 
 ## Our variant calling workflow
 
@@ -513,4 +513,4 @@ So that's our snakemake workshop finished. I hope you all found that useful. Fee
 
 # Credits
 
-This workshop was delivered by Kevin Murray <foss@kdmurray.id.au>. Large portions of this workshop are derived from the upstream documentation on snakemake, mostly written by Johannes Köster and Manuel Holtgrewe. Thanks to Tim Bonnet and the other helpers at RSB for making the workshop run so smoothly. 
+This workshop was delivered by Kevin Murray <foss@kdmurray.id.au>. Large portions of this workshop are derived from the upstream documentation on snakemake, mostly written by Johannes Köster and Manual Holtgrewe. Thanks to Tim Bonnet and the other helpers at RSB for making the workshop run so smoothly. 
