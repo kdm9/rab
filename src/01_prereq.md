@@ -18,6 +18,7 @@ If you can't confidently answer the following questions, brush up on your shell 
 - How do I set the variable `frog` to the string value `Litoria`?
 - How do I print the value of the variable `frog`?
 - How do I loop through the numbers 1 to 10? And how about the looping through the files in the current directory?
+- Explain the difference between the following commands: `ls alice bob` and `ls "alice bob"`.
 
 If there were bits of the above you weren't confident about, consider the following:
 
