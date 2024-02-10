@@ -2,6 +2,9 @@
 
 In over a decade working as a bioinformatician, I've picked up a lot of skills and habits for effective and collaborative analysis. This "book" is an attempt to gather all the various blog posts, lessons, and other guides I've made over the years. This is intended primarily as a complete tutorial/course I can give to research students, to get them up to speed.
 
+Before contining into this course, I highly recommend you quickly check the [assumed knowledge list](01_prereq.md). The rest of the book will make a lot more sense with this knowledge under your belt, and it will help you on your journey towards being a better and more producitve computational biologist for it.
+
+
 # Why even bother?
 
 We all know the story: "Hey, I've done that before, let me quickly find it" --  *600 days later* -- "Ah, *here* it is, in `Untitled.ipynb` in a folder named `analysis.v2.2016.supervisorcopy.bewareoftheleopard`". Good reproducible practice helps to **organise code, data, and dependencies** such that there is a obvious place any given analysis can be found (including code & data), and an obvious way that it can be (re)-run. 
