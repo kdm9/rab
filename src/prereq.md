@@ -56,6 +56,16 @@ You won't need anything like the full content of the following courses to follow
 - [Dive into Python](https://diveintopython3.problemsolving.io/)
 - [Learn Python in X mintues](https://learnxinyminutes.com/docs/python/)
 
+
+## R
+
+Although I never use it in this book, I highly recommend you learn at least the basics of R, with a focus on the tidyverse packages. There is no better way to wrangle or plot the tabular data we often produce as final results in biology. I highly recommend:
+
+
+- [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham
+- The [Rstudio Cheatsheets](https://posit.co/resources/cheatsheets/) are a condensed reference -- print them out and put them on your wall.
+
+
 ## SSH, and remote servers
 
 While not strictly needed, in practice most of you will want to apply the lessons you learn in this book on some remote server rather than your laptop. SSH is the primary way you'll do this, so please know:
