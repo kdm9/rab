@@ -63,6 +63,7 @@ Although I never use it in this book, I highly recommend you learn at least the 
 
 
 - [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham
+- A [Modern Dive into Statistics](https://moderndive.com/) by Chester Ismay and Albert Y. Kim
 - The [Rstudio Cheatsheets](https://posit.co/resources/cheatsheets/) are a condensed reference -- print them out and put them on your wall.
 
 
