@@ -2,7 +2,7 @@
 
 In over a decade working as a bioinformatician, I've picked up a lot of skills and habits for effective and collaborative analysis. This "book" is an attempt to gather all the various blog posts, lessons, and other guides I've made over the years. This is intended primarily as a complete tutorial/course I can give to research students, to get them up to speed.
 
-Before contining into this course, I highly recommend you quickly check the [assumed knowledge list](01_prereq.md). The rest of the book will make a lot more sense with this knowledge under your belt, and it will help you on your journey towards being a better and more producitve computational biologist for it.
+Before contining into this course, I highly recommend you quickly check the [assumed knowledge list](prereq.md). The rest of the book will make a lot more sense with this knowledge under your belt, and it will help you on your journey towards being a better and more producitve computational biologist for it.
 
 
 # Why even bother?
