@@ -1,17 +1,23 @@
 # An introduction to workflow management
 
-Today we're learning how to manage computational workspaces. I'll start with some broad principles around good data hygiene, which are broadly applicable to any computational analyses. We'll touch on ways to neatly organise code and data, how to version our workspaces with git, and how to take notes that remind ourselves of progress.
+Today we're learning how to manage computational workflows. Workflow management is a fancy term for "working out which tasks are needed to complete an analysis". There are quite a list of workflow managers, some specialised and some very generic. These include:
 
-Then, we'll move to cover workflow management, which is a fancy way of saying "smart ways of working out which tasks are needed to complete an analysis". Specifically, we'll look at Snakemake, a python-based workflow manager with a billion fancy features that makes this task less daunting, especially for realistically-complex workflows. 
 
-As our case-study, we'll do a very simple variant calling workflow. This consists of sequence read QC, alignment to a reference, data reformatting, and finally variant calling and filtering. We'll gloss over a lot of the details of the workflow for time reasons, but it has been very nicely outlined in [this data-carpentry tutorial](https://gwu-omics2019.readthedocs.io/en/latest/variant_calling.html)
+- [Snakemake](https://snakemake.readthedocs.io/), a python-based workflow manager with very many features.
+- [Galaxy](https://galaxyproject.org/), a web GUI based workflow manager designed for complete beginners.
+- [NextFlow](https://www.nextflow.io/), a specialised bioinformatics worklow manager. I find it less flexible than Snakemake, but it does have a nice set of pre-made workflows if you do not need flexibility or customisation, [nf-core](https://github.com/nf-core/).
+- Language- or Platform-specific managers, like [Airflow (python/K8s)](https://github.com/apache/airflow), [`targets` (R)](https://books.ropensci.org/targets/) or [Luigi (python)](https://github.com/spotify/luigi). A long list is [available here](https://github.com/meirwah/awesome-workflow-engines)
 
-## Our variant calling workflow
+I've tried most of the above, and while there is no globally correct answer, for me, [Snakemake](https://snakemake.readthedocs.io/) has the perfect balance bettween features, flexiblity, generality, and reliablity.
 
-For the rest of today, we'll focus on a variant calling workflow. This relatively simple workflow consists of several conceptual steps, each of which are made up of one or more commands. Step 2 depends on the output of step 1, and step 3 on step 2, etc. I have already implemented this workflow for you, which you can download and extract using the following commands:
+Therefore, in this tutorial, we'll focus ont Snakemake, a python-based workflow manager with a billion fancy features that makes this task less daunting, especially for realistically-complex workflows. 
+
+## Case study -- variant calling
+
+As our case-study, we'll do a very simple variant calling workflow. This consists of sequence read QC, alignment to a reference, data reformatting, and finally variant calling and filtering. We'll gloss over a lot of the details of the workflow for time reasons, but it has been very nicely outlined in [this data-carpentry tutorial](https://gwu-omics2019.readthedocs.io/en/latest/variant_calling.html). This relatively simple workflow consists of several conceptual steps, each of which are made up of one or more commands. Step 2 depends on the output of step 1, and step 3 on step 2, etc. I have already implemented this workflow for you, which you can download and extract using the following commands:
 
 ```bash
-wget -O bash_version.tar https://github.com/kdmurray91/2020_snakemake-workshop/raw/master/bash_version.tar
+wget -O bash_version.tar https://github.com/kdm9/2020_snakemake-workshop/raw/master/bash_version.tar
 tar xvf bash_version.tar
 cd bash/rawdata/ && bash getref.sh
 cd ..
@@ -26,7 +32,6 @@ These large conceptual steps are:
 The details within each step are largely out of scope, but generally cobble together a series of smaller computational tasks that together perform one of these larger conceptual steps.
 
 We will now inspect each step, discuss what it does, and then run each step in turn.
-
 
 -----
 
@@ -77,20 +82,20 @@ A Snakemake rule has a name (here `bwa_map`) and a number of directives, here `i
 When a workflow is executed, Snakemake tries to generate given **target** files. Target files can be specified via the command line. By executing
 
 ```bash
-$ snakemake -np outputs/mapped_reads/SRR097977.bam
+snakemake -np outputs/mapped_reads/SRR097977.bam
 ```
 
 in the working directory containing the Snakefile, we tell Snakemake to generate the target file `outputs/mapped_reads/SRR097977.bam`. Since we used the `-n` (or `--dry-run`) flag, Snakemake will only show the execution plan instead of actually perform the steps. The `-p` flag instructs Snakemake to also print the resulting shell command for illustration. To generate the target files, **Snakemake applies the rules given in the Snakefile in a top-down way**. The application of a rule to generate a set of output files is called **job**. For each input file of a job, Snakemake again (i.e. recursively) determines rules that can be applied to generate it. This yields a [directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of jobs where the edges represent dependencies. So far, we only have a single rule, and the DAG of jobs consists of a single node. Nevertheless, we can **execute our workflow** with 
 
 ```bash
-$ snakemake outputs/mapped_reads/SRR097977.bam
+snakemake outputs/mapped_reads/SRR097977.bam
 ```
 
 Note that, after completion of above command, Snakemake will not try to create `outputs/mapped_reads/SRR097977.bam` again, because it is already present in the file system. Snakemake **only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job**. 
 
 ## Step 2: Generalizing the read mapping rule
 
-Obviously, the rule will only work for a single sample with reads in the file `data/samples/SRR097977.fastq`. However, Snakemake allows to **generalize rules by using named wildcards**. Simply replace the `SRR097977` in the second input file and in the output file with the wildcard `{sample}`, leading to
+Obviously, the rule will only work for a single sample with reads in the file `data/samples/SRR097977.fastq`. However, Snakemake allows one to **generalize rules by using named wildcards**. Simply replace the `SRR097977` in the second input file and in the output file with the wildcard `{sample}`, leading to
 
 ```
 rule bwa_map:
@@ -110,7 +115,7 @@ When Snakemake determines that this rule can be applied to generate a target fil
 When executing
 
 ```
-$ snakemake -np outputs/mapped_reads/SRR098026.bam
+snakemake -np outputs/mapped_reads/SRR098026.bam
 ```
 
 Snakemake will determine that the rule `bwa_map` can be applied to generate the target file by replacing the wildcard `{sample}` with the value `SRR098026`. In the output of the dry-run, you will see how the wildcard value is propagated to the input files and all filenames in the shell command. You can also **specify multiple targets**, e.g.:
