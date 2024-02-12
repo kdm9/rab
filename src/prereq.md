@@ -33,7 +33,7 @@ If you can't answer the following...
 - What's the typical cycle of git commands needed to share a change with a remote repository?
 - What is a commit, and how does it differ from a branch?
 - What is a staged file, and how does one stage it?
-- How to I get git to send and receive changes from a remote repository?
+- How to I make git send or receive changes from a remote repository?
 
 ...then avail yourself of the resources below:
 
@@ -42,7 +42,7 @@ If you can't answer the following...
 - For a quick refresher, [Learn git in X minutes](https://learnxinyminutes.com/docs/git/) is concise yet reasonably complete
 
 
-## Very basic python
+## Python
 
 At various points we'll mention certain terms, and even use small pieces of python. Being fully comfortable with the entire python language won't be needed, but ideally you'd be able to answer the following questions:
 
@@ -78,12 +78,10 @@ While not strictly needed, in practice most of you will want to apply the lesson
 - When you SSH into a server and type some command, where does that command run?
 - What is the difference between a server and a cluster?
 
-The following resources will help, although I've not quite found an SSH tutorial to my liking yet:
+The following resources will help, although I've not quite found an SSH tutorial to my liking yet (feel free to suggest one!).
 
 - [The Linux Handbook](https://linuxhandbook.com/ssh-basics/) course is a reasonably concise but complete introduction to SSH.
 - [This SSH course](https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work) isn't quite as nice but covers more details on the networking and cryptography underlying ssh.
-
-
 
 ## Some basic common bioinformatics knowledge
 
