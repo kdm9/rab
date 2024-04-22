@@ -2,7 +2,9 @@
 
 In over a decade working as a bioinformatician, I've picked up a lot of skills and habits for effective and collaborative analysis. This "book" is an attempt to gather all the various blog posts, lessons, and other guides I've made over the years. This is intended primarily as a complete tutorial/course I can give to research students, to get them up to speed.
 
-Before contining into this course, I highly recommend you quickly check the [assumed knowledge list](prereq.md). The rest of the book will make a lot more sense with this knowledge under your belt, and it will help you on your journey towards being a better and more producitve computational biologist for it.
+I run local courses based on this book semi-regularly at the MPI in Tübingen -- please email me if you'd like to attend the next one. I am also able to run online courses for other institutes, please get in touch if that is of interest.
+
+Before continuing into this course, I highly recommend you quickly check the [assumed knowledge list](prereq.md). The rest of the book will make a lot more sense with this knowledge under your belt, and it will help you on your journey towards being a better and more productive computational biologist for it.
 
 
 # Why even bother?
@@ -65,3 +67,8 @@ Above, we consider *computational* tools to record specific *computations*. But,
 
 Distributed version control systems are combinations of software and social practices originally designed to manage the development of software, enabling easy versioning, collaboration, and distribution of software. Version control software (these days mainly [`git`](https://git-scm.com/)) provides the tooling that enables a set of social conventions that together ensure that groups of people can effectively collaborate. Both these tools and ways of working apply equally to us as computational scientists, especailly when in teams with several scientists actively working on the comptuational aspects of a project. In this book I cover extensions to `git` including `git-annex` or `datalad` that allow git to manage not just code, but also data, allowing effective collaboration on analyses. 
 
+
+
+# About the Author
+
+[Dr. K.D. Murray](kdmurray.id.au/) is a MSCA fellow in plant-pathogen evolutionary genomics  with Detlef Weigel at the MPI for Biology, Tübingen, Germany. You can read more about my science [here](kdmurray.id.au/science/).
