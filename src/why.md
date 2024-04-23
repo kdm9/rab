@@ -71,4 +71,4 @@ Distributed version control systems are combinations of software and social prac
 
 # About the Author
 
-[Dr. K.D. Murray](kdmurray.id.au/) is an EU Marie Skłodowska-Curie Actions Postdoctoral (MSCA) fellow in plant-pathogen evolutionary genomics  with Detlef Weigel at the MPI for Biology, Tübingen, Germany. You can read more about my science [here](kdmurray.id.au/science/).
+[Dr. K.D. Murray](https://kdmurray.id.au/) is an EU Marie Skłodowska-Curie Actions Postdoctoral (MSCA) fellow in plant-pathogen evolutionary genomics  with Detlef Weigel at the MPI for Biology, Tübingen, Germany. You can read more about my science [here](https://kdmurray.id.au/science/).
