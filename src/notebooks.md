@@ -25,7 +25,7 @@ Below, I'll guide you through setting up JuptyerLab, with Python, R, and Bash ke
 
 ### Apptainer
 
-If your server/cluster/laptop supports it, I recommend using [apptainer](https://apptainer.org/) to run a notebook container I have prepared. This ensures you have a recent version of both python3 and R, even on older systems. With apptainer, there is no installation step: apptainer will automatically pull the image when you go to run it. Therefore, one can simply run the following
+If your server/cluster/laptop supports it, I recommend using [apptainer](https://apptainer.org/) to run a notebook container I have prepared. This ensures you have a recent version of both python3 and R, even on older systems. With apptainer, there is no installation step: apptainer will automatically pull the image when you go to run it. Therefore, one can simply run the following within a [tmux or screen](./terminal.md#tmux) session:
 
 ```bash
 apptainer exec \
@@ -35,7 +35,7 @@ apptainer exec \
 
 ```
 
-As above, set `--ip` and `--port` appropriately. The `-B` arguments map paths between the host and the container running jupyter -- please adjust these to include any directory you'll need to access, including host `/tmp` filesystems, NFS mounts, and your home dir. Additionally, conda is installed to `/opt/conda`, so add the following to your `~/.bashrc` or `~/.bash_env` to enable the use of conda within jupyter notebooks.
+Please set `--ip` and `--port` to your situation. An IP of 0.0.0.0 is equivalent to a wildcard, i.e. run on both the local and externally-accessible server adresses. Your port should be any number between 1025 and 65000 that you can remember (and isn't already taken by someone else on that server). The `-B` arguments map paths between the host and the container running jupyter -- please adjust these to include any directory you'll need to access, including host `/tmp` filesystems, NFS mounts, and your home dir. Additionally, conda is installed to `/opt/conda`, so add the following to your `~/.bashrc` or `~/.bash_env` to enable the use of conda within jupyter notebooks.
 
 ```
 if [ -f "/opt/conda/etc/profile.d/conda.sh" ]
@@ -49,6 +49,7 @@ then
 fi
 ```
 
+You may notice that there is strange prompt in place of your normal bash prompt. If this bothers you, add `export SINGULARITYENV_PS1="[singularity] $PS1"` to your `~/.bashrc`, and re-launch jupyter as above (you can always just hit control-c to cancel it). Another note: I have `jupyterlab-vim` installed in this image, providing vim-like keybindings. If this is not to your taste, you can disable (but not uninstall) it according to [these instructions](https://github.com/jupyterlab-contrib/jupyterlab-vim/issues/142#issuecomment-2211175299).
 
 ### Pip-based install
 
