@@ -49,7 +49,7 @@ then
 fi
 ```
 
-You may notice that there is strange prompt in place of your normal bash prompt. If this bothers you, add `export SINGULARITYENV_PS1="[singularity] $PS1"` to your `~/.bashrc`, and re-launch jupyter as above (you can always just hit control-c to cancel it). Another note: I have `jupyterlab-vim` installed in this image, providing vim-like keybindings. If this is not to your taste, you can disable (but not uninstall) it according to [these instructions](https://github.com/jupyterlab-contrib/jupyterlab-vim/issues/142#issuecomment-2211175299).
+You may notice that there is strange prompt in place of your normal bash prompt. If this bothers you, add `export SINGULARITYENV_PS1="[singularity] $PS1"` to your `~/.bashrc`, and re-launch jupyter as above (you can always just hit control-c to cancel it). Another note: I have `jupyterlab-vim` installed in this image, providing vim-like keybindings. If this is not to your taste, you can disable (but not uninstall) it according to [these instructions](https://github.com/jupyterlab-contrib/jupyterlab-vim/issues/142#issuecomment-2211175299) (`Settings` menu → `Settings Editor` → `Notebook Vim` → Uncheck both `Enabled` and `Enabled in Text Editor`).
 
 ### Pip-based install
 
