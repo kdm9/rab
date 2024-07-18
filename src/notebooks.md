@@ -23,6 +23,35 @@ As discussed above, the Jupyter ecosystem is my preferred way of doing literate 
 
 Below, I'll guide you through setting up JuptyerLab, with Python, R, and Bash kernels configured. You can run these commands on a nice beefy server, or on your local machine. I prefer to use nice big servers, where data lives, not a laptop with limited compute & storage (unless your data needs are small), although I still use this same setup on my laptop for when I'm doing something locally.
 
+### Apptainer
+
+If your server/cluster/laptop supports it, I recommend using [apptainer](https://apptainer.org/) to run a notebook container I have prepared. This ensures you have a recent version of both python3 and R, even on older systems. With apptainer, there is no installation step: apptainer will automatically pull the image when you go to run it. Therefore, one can simply run the following
+
+```bash
+apptainer exec \
+	-B /tmp/global2 -B /ebio \
+	docker://ghcr.io/kdm9/notebooks:latest \
+	jupyter lab --no-browser --port $YOUR_PORT --ip 0.0.0.0
+
+```
+
+As above, set `--ip` and `--port` appropriately. The `-B` arguments map paths between the host and the container running jupyter -- please adjust these to include any directory you'll need to access, including host `/tmp` filesystems, NFS mounts, and your home dir. Additionally, conda is installed to `/opt/conda`, so add the following to your `~/.bashrc` or `~/.bash_env` to enable the use of conda within jupyter notebooks.
+
+```
+if [ -f "/opt/conda/etc/profile.d/conda.sh" ]
+then
+    . "/opt/conda/etc/profile.d/conda.sh"
+fi
+
+if [ -f "/opt/conda/etc/profile.d/mamba.sh" ]
+then
+    . "/opt/conda/etc/profile.d/mamba.sh"
+fi
+```
+
+
+### Pip-based install
+
 First, we need to install the relevant bits of the Jupyter ecosystem, including the Jupyter core, JupyterLab, and kernels for R, Bash, and Python (add any other languages you want supported here, see discussion above/[this list](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels)).
 
 ```bash
@@ -32,12 +61,16 @@ python3 -m bash_kernel.install
 Rscript -e 'install.packages("IRkernel"); IRkernel::installspec()'
 ```
 
+
 Next, we must set up and launch our server. First, we have to set a password, so that we can more simply log in. Then, we start the JupyterLab server in a new Tmux session (see the next session). You should pick a unique port number (between 1025 and 65000), which you will need to remember (or bookmark). Replace `YOUR_PORT` with your actual port number in the commands below.
 
 ```bash
 jupyter server password # enter a NEW password here
 tmux new-session jupyter lab --port YOUR_PORT --no-browser
 ```
+
+
+## Using Jupyter
 
 Then you should be all set up. Go to your server's address, e.g. `http://server.address.blah:YOUR_PORT` (or `http://localhost:YOUR_PORT` if running on your laptop) in a modern browser (Firefox/Chromium/Safari). It will ask for your password, which will be the one you set with `jupyter server password`, *NOT* your normal password for that server or laptop.
 
