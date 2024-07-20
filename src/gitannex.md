@@ -1,21 +1,5 @@
 # `git-annex`: version control for reproducible analyses
 
-## Quick-start:
-
-
-### A `curl|sh` for installing git-annex
-
-Yes, this is a bad idea. Yes, everybody does it anyway. On modern linux systems, running
-
-```
-curl -LSs https://gist.github.com/kdm9/2c715a2e4fc1c4f93bb22c0beba6d73e/raw/get-annex.sh | bash
-```
-
-will install git-annex standalone under `~/.local/opt`, with symlinks to
-`~/.local/bin`. It will also check if you have that directory on your `$PATH`,
-and suggest a way to ensure you do if that's not the case.
-
-
 # Introduction
 
 [Git](https://git-scm.com/) has been a revolutionary tool for online
@@ -230,6 +214,64 @@ large files available to the wider world, without giving access to the local
 HPC storage, and without paying for the exorbitant storage and bandwidth costs
 of git-lfs. See the [git-annex
 docs](https://git-annex.branchable.com/special_remotes/) for more info.
+
+
+## Quick-start cheatsheet:
+
+
+### A `curl|sh` for installing git-annex
+
+Yes, this is a bad idea. Yes, everybody does it anyway. On modern linux systems, running
+
+```
+curl -LSs https://gist.github.com/kdm9/2c715a2e4fc1c4f93bb22c0beba6d73e/raw/get-annex.sh | bash
+```
+
+will install git-annex standalone under `~/.local/opt`, with symlinks to
+`~/.local/bin`. It will also check if you have that directory on your `$PATH`,
+and suggest a way to ensure you do if that's not the case.
+
+### Common commands
+
+```bash
+# Add a file to be tracked by git. If it's a large file (see configuration in
+# .gitattributes above), then add it as an immutable, locked copy.
+git annex add some/directory/  ./or-files.txt
+
+# Unlock an immutable large file, so that you can edit or overwrite it
+git annex unlock ./directory/ ./or-file.txt
+
+# Save changes to an unlocked file (same as adding it the first time)
+git annex add ./blah
+
+# Discard changes to an unlocked file, reverting it to the previous copy
+# (dangerous, so it needs --force. run without force to see what it would do)
+git annex lock --force ./blah
+
+# Commit changes
+git commit -m "add modelling inputs"
+
+# Send and receive the changes to code and knowledge about the existance of any
+# large files (but *not* their content)
+git annex sync
+
+# Push all changes, including the actual content of large files. You can give
+# a list of remotes to push to, in this case 'github' and 'largeserver'. git
+# annex will push code to all repositories, and large files to any repository
+# set up to recieve large files (e.g. a server or special remote, but not
+# github or similar sites).
+git annex push github largeserver
+
+# Copy large files to some remote (you can give directories or paths to files)
+git annex copy --to taco notebook/data/2_modelling
+
+# Get large files from some remote that contains them
+git annex get path/to/dir ./and-files.txt
+# (if need be, you can use --from with git annex get to force it to use e.g.
+# a local server instead of one at some remote site)
+
+```
+
 
 
 [^1]: Others, like git-lfs, are designed to work with cloud-based git hosting
